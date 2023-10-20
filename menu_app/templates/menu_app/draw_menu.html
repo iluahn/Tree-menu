@@ -1,0 +1,18 @@
+{% load my_tags %}
+
+{% block content %}
+    {{ menu_name }}:
+    <p>
+        {{ root_node.name }}
+    </p>
+    {% for child in children %}
+        <p>
+            {{ "----"|repeat:child.level }}
+            {{ child.name }}
+        </p>
+    {% empty %}
+        <p>Empty</p>
+    {% endfor %}
+{% endblock content %}
+
+

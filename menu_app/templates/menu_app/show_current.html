@@ -1,0 +1,34 @@
+{% extends "menu_app/base.html" %}
+{% load my_tags %}
+
+{% block content %}
+    {% if parents %}
+        </br>
+    {% endif %}
+    {% for parent in parents %}
+        <p>
+            {{ "----"|repeat:indent }}
+            <a href="{% url 'menu_app:show_current' parent.id %}">{{parent.name}}</a>
+            {% inc indent as indent %}
+        </p>
+    {% empty %}
+        <a href="{% url 'menu_app:show_menu' menu_item.menu.name %}">Draw menu {{menu_item.menu.name}}<a>
+    {% endfor %}
+    <p>
+        {% with parent_indent=parents|length %}     
+            {{ "----"|repeat:parent_indent }}
+        {% endwith %}
+        {{menu_item.name}}
+    </p>
+    {% with parent_indent=parents|length %} 
+    {% for child in children %}
+        <p>
+            {% if child.level < 2 %}
+                {% inc parent_indent as child_indent %}
+                {{ "----"|repeat:child_indent }}
+                <a href="{% url 'menu_app:show_current' child.id %}">{{child.name}}</a>
+            {% endif %}
+        </p>
+    {% endfor %}
+    {% endwith %}
+{% endblock content %}

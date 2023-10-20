@@ -1,0 +1,7 @@
+{% load my_tags %}
+{% for menu in menus %}
+    <p>
+        <a href="{% url 'menu_app:show_menu' menu.name %}">Draw menu {{menu.name}}<a>
+    </p>
+    {% show_top_menu menu %}
+{% endfor %}

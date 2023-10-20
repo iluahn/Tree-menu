@@ -1,0 +1,11 @@
+{% load my_tags %}
+
+{% block content %}
+    {{root_node.name}}
+    {% for child in children %}
+        <p>
+            {{ "----"|repeat:1 }}
+            <a href="{% url 'menu_app:show_current' child.id %}">{{child.name}}</a>
+        </p>
+    {% endfor %}
+{% endblock content %}
